@@ -12,9 +12,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(cider-auto-mode t)
+ '(custom-enabled-themes (quote (tango-dark)))
+ '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
-    (cython-mode ## clojure-mode scala-mode auto-complete-clang auto-complete-c-headers))))
+    (company-go go-fill-struct go-scratch go-errcheck go-tag go-stacktracer go-snippets go-imenu go-playground-cli go-impl go-autocomplete go-complete go-gopath go-projectile go-playground go-imports golint go-mode clojars cider-hydra cider cython-mode ## clojure-mode scala-mode auto-complete-clang auto-complete-c-headers)))
+ '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,4 +28,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+(add-hook 'go-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends) '(company-go))
+            (company-mode)))
+
 (global-auto-complete-mode t)
+(global-set-key [?\C-x ?\M-x] 'company-complete)
