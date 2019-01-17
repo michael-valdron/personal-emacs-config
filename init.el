@@ -17,9 +17,10 @@
  '(cider-auto-mode t)
  '(custom-enabled-themes (quote (tango-dark)))
  '(indent-tabs-mode nil)
+ '(jdee-server-dir "~/jdee-server")
  '(package-selected-packages
    (quote
-    (company-go go-fill-struct go-scratch go-errcheck go-tag go-stacktracer go-snippets go-imenu go-playground-cli go-impl go-autocomplete go-complete go-gopath go-projectile go-playground go-imports golint go-mode clojars cider-hydra cider cython-mode ## clojure-mode scala-mode auto-complete-clang auto-complete-c-headers)))
+    (ac-cider cider-eval-sexp-fu gradle-mode jdee lsp-java eclim javadoc-lookup java-snippets java-imports javaimp javap-mode company ensime sbt-mode markdown-toc markdown-mode+ markdown-mode python-mode company-go go-fill-struct go-scratch go-errcheck go-tag go-stacktracer go-snippets go-imenu go-playground-cli go-impl go-autocomplete go-complete go-gopath go-projectile go-playground go-imports golint go-mode clojars cider-hydra cider cython-mode ## clojure-mode scala-mode auto-complete-clang auto-complete-c-headers)))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -33,5 +34,15 @@
             (set (make-local-variable 'company-backends) '(company-go))
             (company-mode)))
 
-(global-auto-complete-mode t)
+
+;;(use-package ensime
+;;             :ensure t
+;;             :pin melpa-stable)
+
+(setq
+ ensime-sbt-command "sbt"
+ sbt:program-name "sbt")
+
+
+(global-company-mode t)
 (global-set-key [?\C-x ?\M-x] 'company-complete)
