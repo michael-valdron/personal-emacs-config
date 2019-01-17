@@ -1,4 +1,4 @@
-# personal-emacs-config
+# My Personal Emacs Setup
 My personal emacs configuration using emacs Lisp.
 
 # Directory Paths
