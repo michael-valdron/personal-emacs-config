@@ -20,7 +20,9 @@
  '(jdee-server-dir "~/jdee-server")
  '(package-selected-packages
    (quote
-    (ac-cider cider-eval-sexp-fu gradle-mode jdee lsp-java eclim javadoc-lookup java-snippets java-imports javaimp javap-mode company ensime sbt-mode markdown-toc markdown-mode+ markdown-mode python-mode company-go go-fill-struct go-scratch go-errcheck go-tag go-stacktracer go-snippets go-imenu go-playground-cli go-impl go-autocomplete go-complete go-gopath go-projectile go-playground go-imports golint go-mode clojars cider-hydra cider cython-mode ## clojure-mode scala-mode auto-complete-clang auto-complete-c-headers)))
+    ((quote company)
+     (quote company-mode)
+     ac-cider cider-eval-sexp-fu gradle-mode jdee lsp-java eclim javadoc-lookup java-snippets java-imports javaimp javap-mode company ensime sbt-mode markdown-toc markdown-mode+ markdown-mode python-mode company-go go-fill-struct go-scratch go-errcheck go-tag go-stacktracer go-snippets go-imenu go-playground-cli go-impl go-autocomplete go-complete go-gopath go-projectile go-playground go-imports golint go-mode clojars cider-hydra cider cython-mode ## clojure-mode scala-mode auto-complete-clang auto-complete-c-headers)))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -34,15 +36,26 @@
             (set (make-local-variable 'company-backends) '(company-go))
             (company-mode)))
 
-
-;;(use-package ensime
-;;             :ensure t
-;;             :pin melpa-stable)
-
-(setq
- ensime-sbt-command "sbt"
- sbt:program-name "sbt")
+(defun install-plugins ()
+  (interactive)
+  (let* ((packages '(company ac-cider cider-eval-sexp-fu gradle-mode
+                             jdee lsp-java eclim javadoc-lookup java-snippets
+                             java-imports javaimp javap-mode company ensime
+                             sbt-mode markdown-toc markdown-mode+ markdown-mode
+                             python-mode company-go go-fill-struct go-scratch
+                             go-errcheck go-tag go-stacktracer go-snippets
+                             go-imenu go-playground-cli go-impl go-autocomplete
+                             go-complete go-gopath go-projectile go-playground go-imports
+                             golint go-mode clojars cider-hydra cider cython-mode
+                             clojure-mode scala-mode auto-complete-clang auto-complete-c-headers))
+         (packages-new))
+    (package-refresh-contents)
+    (dolist (p packages packages-new)
+      (package-install p)
+      (setq packages-new (cons p packages)))))
 
 
 (global-company-mode t)
+(global-flycheck-mode t)
 (global-set-key [?\C-x ?\M-x] 'company-complete)
+;;; end
